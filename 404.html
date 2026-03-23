@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | UrDU</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .not-found {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(77, 91, 153, 0.14), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(200, 146, 20, 0.14), transparent 28%),
+        linear-gradient(180deg, #f7f9ff 0%, #fffdf8 100%);
+    }
+
+    .not-found__card {
+      width: min(100%, 720px);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(19, 31, 56, 0.08);
+      border-radius: 30px;
+      box-shadow: 0 28px 70px rgba(17, 28, 68, 0.12);
+      text-align: center;
+      padding: 46px 28px 38px;
+    }
+
+    .not-found__icon {
+      width: 104px;
+      height: 104px;
+      margin: 0 auto 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #eef4ff, #dce6ff);
+      color: var(--brand-blue);
+      font-size: 42px;
+      box-shadow: inset 0 0 0 1px rgba(36, 81, 198, 0.08);
+    }
+
+    .not-found__code {
+      margin: 0;
+      font-size: clamp(94px, 18vw, 156px);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      color: var(--brand-blue-deep);
+    }
+
+    .not-found__title {
+      margin: 18px 0 14px;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.08;
+      color: var(--brand-blue-deep);
+    }
+
+    .not-found__desc {
+      margin: 0 auto 28px;
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ink-500);
+    }
+
+    .not-found__actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .not-found__button {
+      background: linear-gradient(180deg, #3b6cff, #2451c6);
+      color: #fff;
+      box-shadow: 0 18px 36px rgba(36, 81, 198, 0.24);
+    }
+
+    .not-found__hint {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #97a1b5;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      .not-found__card {
+        padding: 42px 20px 32px;
+        border-radius: 28px;
+      }
+
+      .not-found__desc {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="not-found">
+    <section class="not-found__card">
+      <div class="not-found__icon">
+        <i class="ph ph-house-line"></i>
+      </div>
+      <p class="not-found__code">404</p>
+      <h1 class="not-found__title" data-key="title">Sahifa topilmadi</h1>
+      <p class="not-found__desc" data-key="desc">So'ralgan manzil topilmadi. URL noto'g'ri yozilgan bo'lishi mumkin yoki sahifa olib tashlangan.</p>
+      <div class="not-found__actions">
+        <a class="button not-found__button" href="index.html" data-key="home">Asosiy sahifaga qaytish</a>
+      </div>
+      <div class="not-found__hint" data-key="hint">UrDU error page</div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <script>
+    const translations404 = {
+      uz: {
+        title: "Sahifa topilmadi",
+        desc: "So'ralgan manzil topilmadi. URL noto'g'ri yozilgan bo'lishi mumkin yoki sahifa olib tashlangan.",
+        home: "Asosiy sahifaga qaytish",
+        hint: "UrDU xatolik sahifasi"
+      },
+      kk: {
+        title: "Bet tabılmadı",
+        desc: "Soralǵan mánzil tabılmadı. URL qáte jazılǵan bolıwı múmkin yamasa bet alıp tastalǵan.",
+        home: "Bas betke qaytıw",
+        hint: "UrDU qátelik beti"
+      },
+      ru: {
+        title: "Страница не найдена",
+        desc: "Запрошенный адрес не найден. Возможно, URL указан неверно или страница была удалена.",
+        home: "Вернуться на главную",
+        hint: "Страница ошибки UrDU"
+      },
+      en: {
+        title: "Page not found",
+        desc: "The requested address was not found. The URL may be incorrect or the page may have been removed.",
+        home: "Back to home page",
+        hint: "UrDU error page"
+      }
+    };
+
+    function apply404Language(lang) {
+      const current = translations404[lang] ? lang : "uz";
+      document.documentElement.lang = current;
+      document.querySelectorAll("[data-key]").forEach((node) => {
+        const key = node.getAttribute("data-key");
+        if (translations404[current][key]) node.textContent = translations404[current][key];
+      });
+      localStorage.setItem("lang", current);
+    }
+
+    const savedLang = localStorage.getItem("lang") || "uz";
+    apply404Language(savedLang);
+  </script>
+</body>
+</html>
